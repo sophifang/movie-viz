@@ -3,13 +3,13 @@
   Generates an SVG Beeswarm chart using a [d3-force simulation](https://github.com/d3/d3-force).
  -->
 <script>
-  import { getContext } from 'svelte';
+  import { getContext, afterUpdate } from 'svelte';
   import { forceSimulation, forceX, forceY, forceCollide } from 'd3-force';
-	import { mode } from 'd3';
 
   const { data, xGet, height} = getContext('LayerCake');
-  const nodes = $data.map((d) => ({ ...d }));
-  console.log(nodes)
+  // const nodes = $data.map((d) => ({ ...d }));
+  // console.log(nodes)
+  let nodes = [];
 
   /** @type {Number} [r=4] - The circle radius size in pixels. */
   export let r = 4;
@@ -31,9 +31,12 @@
 
   /** @type {Function} [getTitle]��An accessor function to get the field on the data element to display as a hover label using a `<title>` tag. */
   export let getTitle = undefined;
-
  
-
+  afterUpdate(() => {
+    // Initialize nodes with the current data
+    nodes = $data.map((d) => ({ ...d }));
+    console.log(nodes)
+  });
 
 
   $: simulation = forceSimulation(nodes)

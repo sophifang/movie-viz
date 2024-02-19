@@ -1,6 +1,18 @@
 <script>
   import * as d3 from 'd3';
   import {onMount} from 'svelte';
+  let data = [];
+  let dataTransformed = [];
+  onMount(async function() {
+        const res = await fetch(
+            'movies_top200.csv',
+        );
+        const csv = await res.text();
+      data = d3.csvParse(csv, d3.autoType);
+
+      getCertificates();
+      console.log(data);
+	});
   import { LayerCake, Svg, Html } from 'layercake';
   import Menu from './_components/Menu.svelte';
   import Key from './_components/Key.html.svelte';
@@ -10,16 +22,6 @@
   const titleKey = 'title';
   const imageUrl = 'image';
   const r = 15;
-  let data = [];
-  onMount(async function() {
-        const res = await fetch(
-            'movies_top200.csv',
-        );
-        const csv = await res.text();
-        data = d3.csvParse(csv, d3.autoType);
-        getCertificates()
-        console.log(data);
-	});
   let certificates = []; // menu built from bookData
 	let selectedCert = ""; //  menu selection	
 	
@@ -32,25 +34,6 @@
 		certificates = certificates.sort();
     console.log(certificates);
 	}	
-	
-	
-	// Query results
-	let filteredMovies = [];
-	
-	// For Select Menu
-	$: if (selectedCert) getBooksByLang();
-	$: console.log(filteredMovies, selectedCert);
-	
-	const getBooksByLang = () => {
-	
-		if (selectedCert === "all") {
-			return filteredMovies = [];
-		} 
-		return filteredMovies = data.filter(movie => movie.certificate === selectedCert);
-
-	}	
-
-
 </script>
 
 <main>
@@ -70,12 +53,14 @@
     width: 80%;
     height: 650px;
     margin: 0 auto;
+    text-align: center;
+    padding-bottom: 100px;
   }
 </style>
 
 <div class='chart-container'>
   <LayerCake
-    padding={{bottom: 100}}
+    padding={{bottom: 15}}
     x={xKey}
     data={data}
     let:width
@@ -89,7 +74,6 @@
         xStrength={0.95}
         yStrength={0.075}
         getTitle={d => d[titleKey]}
-        getImage={d=> d[imageUrl]}
         selected = {selectedCert}
       />
     </Svg>
@@ -99,4 +83,5 @@
     </Html>
 
   </LayerCake>
+  <p>Rating</p>
 </div>
