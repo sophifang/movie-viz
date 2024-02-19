@@ -8,7 +8,6 @@
 	import { mode } from 'd3';
 
   const { data, xGet, height} = getContext('LayerCake');
-
   const nodes = $data.map((d) => ({ ...d }));
   console.log(nodes)
 
@@ -21,6 +20,9 @@
   /** @type {String} [stroke='#fff'] - The circle's stroke color. */
   export let stroke = '#000';
 
+  /** @type {String} [stroke='#fff'] - The circle's stroke color. */
+  export let selected = '';
+
   /** @type {Number} [xStrength=0.95] - The value passed into the `.strength` method on `forceX`. See [the documentation](https://github.com/d3/d3-force#x_strength). */
   export let xStrength = 0.95;
 
@@ -29,6 +31,9 @@
 
   /** @type {Function} [getTitle]��An accessor function to get the field on the data element to display as a hover label using a `<title>` tag. */
   export let getTitle = undefined;
+
+ 
+
 
 
   $: simulation = forceSimulation(nodes)
@@ -48,24 +53,45 @@
 </script>
 
 <g class='bee-group'>
+    <filter id="saturate">
+      <feColorMatrix type="saturate" values="0"/>
+    </filter>
   {#each simulation.nodes() as node}
     <defs>
       <pattern id={`image-pattern-${node.index}`} x="0" y="0" height="100%" width="100%" patternContentUnits="objectBoundingBox">
         <image href="{node.image}" x="0" y="0" width="1" height="1" preserveAspectRatio="xMidYMid slice" />
       </pattern>
     </defs>
-    <circle
-      fill={`url(#image-pattern-${node.index})`}
-      stroke='{stroke}'
-      stroke-width='{strokeWidth}'
-      cx='{node.x}'
-      cy='{node.y}'
-      r='{r}'
-    >
-      {#if getTitle}
-        <title>{node.title}</title>
-        <!-- <title>{node.certificate}</title> -->
-      {/if}
-    </circle>
+    
+    {#if selected === "all" || node.certificate === selected || selected === ""}
+        <circle
+        fill={`url(#image-pattern-${node.index})`}
+        stroke='{stroke}'
+        stroke-width='{strokeWidth}'
+        cx='{node.x}'
+        cy='{node.y}'
+        r='{r}'
+      >
+        {#if getTitle}
+          <title>{node.title}: {node.rating} rating</title>
+        {/if}
+      </circle>
+    {:else}
+
+          <circle
+                fill={`url(#image-pattern-${node.index})`}
+                stroke='{stroke}'
+                stroke-width='{strokeWidth}'
+                cx='{node.x}'
+                cy='{node.y}'
+                r='{r}'
+                filter = {'url(#saturate)'}
+                opacity = 0.45
+              >
+                {#if getTitle}
+                  <title>{node.title}</title>
+                {/if}
+              </circle>
+        {/if}
   {/each}
 </g>
