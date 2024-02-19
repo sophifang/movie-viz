@@ -73,7 +73,7 @@
         r='{r}'
       >
         {#if getTitle}
-          <title>{node.title}: {node.rating} rating</title>
+          <title>{node.title} ({node.rating} rating)</title>
         {/if}
       </circle>
     {:else}
