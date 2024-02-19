@@ -8,7 +8,7 @@
                       name="menu" 
                       id="menu" 
                       bind:value={selectedCert}>
-          <option disabled selected value="">Select a certificate.</option>
+          <option disabled selected value="">Select a certificate</option>
           <option value="all">All certificates</option>
           {#each certificates as certificate}
               <option value={certificate}>{certificate}</option>
@@ -17,13 +17,7 @@
   </section>
   
   
-  <style>
-      .menu-cont {
-          width: 200px;
-          display: flex;
-          margin: 0 10px 50px 100px;
-      }
-      
+  <style>     
       select {
           margin: 0;
           font-size: 1.18rem;

@@ -20,8 +20,11 @@
   /** @type {String} [stroke='#fff'] - The circle's stroke color. */
   export let stroke = '#000';
 
-  /** @type {String} [stroke='#fff'] - The circle's stroke color. */
+  /** @type {String} [selected=''] - The selected certification. */
   export let selected = '';
+
+  /** @type {String} [graph='rating'] - The selected graph. */
+  export let graph = 'rating';
 
   /** @type {Number} [xStrength=0.95] - The value passed into the `.strength` method on `forceX`. See [the documentation](https://github.com/d3/d3-force#x_strength). */
   export let xStrength = 0.95;
@@ -33,7 +36,6 @@
   export let getTitle = undefined;
  
   afterUpdate(() => {
-    // Initialize nodes with the current data
     nodes = $data.map((d) => ({ ...d }));
     console.log(nodes)
   });
@@ -76,7 +78,12 @@
         r='{r}'
       >
         {#if getTitle}
+          {#if graph === "rating"}
           <title>{node.title} ({node.rating} rating)</title>
+          {/if}
+          {#if graph === "gross"}
+          <title>{node.title} ({+(node.gross/1000000).toFixed(2)}M gross)</title>
+          {/if}
         {/if}
       </circle>
     {:else}
@@ -92,7 +99,12 @@
                 opacity = 0.45
               >
                 {#if getTitle}
+                  {#if graph === "rating"}
                   <title>{node.title} ({node.rating} rating)</title>
+                  {/if}
+                  {#if graph === "gross"}
+                  <title>{node.title} ({+(node.gross/1000000).toFixed(2)}M gross)</title>
+                  {/if}
                 {/if}
               </circle>
         {/if}
