@@ -89,7 +89,7 @@
                 opacity = 0.45
               >
                 {#if getTitle}
-                  <title>{node.title}</title>
+                  <title>{node.title} ({node.rating} rating)</title>
                 {/if}
               </circle>
         {/if}
