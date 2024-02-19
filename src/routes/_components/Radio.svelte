@@ -6,7 +6,6 @@
     export let options;
     export let legend;
     export let userSelected = options[0].value;
-      export let fontSize = 16;
       export let flexDirection = 'column'
       
       const uniqueID = Math.floor(Math.random() * 100)

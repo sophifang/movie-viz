@@ -50,8 +50,7 @@
 <main>
   <h1>Does a Movie's Certificate Affect Its Performance?</h1>
   <h3>An analysis of the top 200 highest-rated movies on IMDb from 1921-2020</h3>
-  <p><i>Please view visualization in full screen for best experience.</i></p>
-  <p><b>What do we mean by certificate?</b><br>A movie's certificate reflects its suitability for certain audiences based on its content. See below for specific certificates and their meanings</p>
+  <p><i>Please view this visualization in desktop full screen for the best experience.</i></p>
 </main>
 <section id="query-section">
 	<Menu {certificates} bind:selectedCert />
@@ -75,9 +74,17 @@
 		align-items: center;
     margin-left: 150px;
 	}
+  .certification {
+    width: 80%;
+    text-align: left;
+    margin-left: 150px;
+    padding-bottom: 100px;
+  }
 </style>
 {#if radioValue === 'rating'}
 <div class='chart-container'>
+  <p><b>Rating</b></p>
+  <br>
   <LayerCake
     padding={{bottom: 15}}
     x={xKey}
@@ -98,12 +105,13 @@
       />
     </Svg>
   </LayerCake>
-  <p><b>Rating</b></p>
 </div>
 {/if}
 
 {#if radioValue === 'gross'}
 <div class='chart-container'>
+  <p><b>Gross ($)</b><br><i>Note: Movies with missing gross values have been excluded from the visualization below.</i></p>
+  <br>
   <LayerCake
     padding={{bottom: 15}}
     x={'gross'}
@@ -126,7 +134,20 @@
       />
     </Svg>
   </LayerCake>
-  <p><b>Gross ($)</b></p>
-  <p><i>Note: Movies with missing gross values have been excluded from the visualization above.</i></p>
 </div>
 {/if}
+<div class = "certification">
+  <p><b>What Do We Mean By Certificate?</b><br>A movie's certificate reflects its suitability for certain audiences. See below for specific certificates and their meanings</p>
+<p><b>Explanation of U.S. Movie Certification Symbols</b></p>
+<ul>
+  <li><strong>A:</strong> Adults only.</li>
+  <li><strong>G:</strong> General audiences – All ages admitted.</li>
+  <li><strong>PG:</strong> Parental guidance suggested – Some material may not be suitable for children.</li>
+  <li><strong>PG-13:</strong> Parents strongly cautioned – Some material may be inappropriate for children under 13.</li>
+  <li><strong>R:</strong> Restricted – Under 17 requires accompanying parent or adult guardian.</li>
+  <li><strong>TV-14:</strong> This program contains material that most parents would find unsuitable for children under 14 years of age.</li>
+  <li><strong>TV-MA:</strong> This program is specifically designed to be viewed by adults and therefore may be unsuitable for children under 17.</li>
+  <li><strong>U:</strong> Unrestricted - Suitable for children aged 4 and older. </li>
+  <li><strong>UA:</strong> Unrestricted - Parental discretion advisory for children under 12 years.</li>
+</ul>
+</div>
