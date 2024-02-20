@@ -50,7 +50,7 @@
   <h1>Does a Movie's Certificate Affect Its Performance?</h1>
   <h3>An analysis of the top 200 highest-rated movies on IMDb from 1921-2020</h3>
   <p><i>Please view this visualization in desktop full screen for the best experience.</i></p>
-  <span><a href="src\routes\DSC106 Project 3 Writeup.pdf" target="_blank">Documentation</a>
+  <span><a href="https://docs.google.com/document/d/17_2ZdVDHLbOt0AQUCifXmE32THtgTz9EUuTjvej26UY/edit?usp=sharing" target="_blank">Documentation</a>
    | <a href="https://github.com/sophifang/movie-viz" target="_blank">GitHub Repo</a>
   </span>
   </main>
