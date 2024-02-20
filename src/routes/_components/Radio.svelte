@@ -55,7 +55,6 @@
         display: flex;
         flex-direction: row;
         padding: 10px;
-        margin-left: 650px;
       }
 
     label {

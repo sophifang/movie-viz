@@ -83,7 +83,7 @@
 
 <style>
   .tick {
-    font-size: 0.725em;
+    font-size: 1em;
     font-weight: 200;
   }
 

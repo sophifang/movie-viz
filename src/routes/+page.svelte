@@ -2,7 +2,6 @@
   import * as d3 from 'd3';
   import {onMount} from 'svelte';
   let data = [];
-  let dataTransformed = [];
   onMount(async function() {
         const res = await fetch(
             'movies_top200.csv',
@@ -51,7 +50,10 @@
   <h1>Does a Movie's Certificate Affect Its Performance?</h1>
   <h3>An analysis of the top 200 highest-rated movies on IMDb from 1921-2020</h3>
   <p><i>Please view this visualization in desktop full screen for the best experience.</i></p>
-</main>
+  <span><a href="src\routes\DSC106 Project 3 Writeup.pdf" target="_blank">Documentation</a>
+   | <a href="https://github.com/sophifang/movie-viz" target="_blank">GitHub Repo</a>
+  </span>
+  </main>
 <section id="query-section">
 	<Menu {certificates} bind:selectedCert />
   <Radio {options} legend='Select a performance metric' bind:userSelected={radioValue}/>
@@ -68,22 +70,25 @@
     padding-bottom: 100px;
   }
   #query-section {
-		width: 80%;
+		width: 70%;
 		display: flex;
-		justify-content: left;
+		justify-content: space-between;
 		align-items: center;
-    margin-left: 150px;
+    margin-left: 17%;
 	}
   .certification {
-    width: 80%;
+    width: 70%;
     text-align: left;
-    margin-left: 150px;
+    margin-left: 18%;
     padding-bottom: 100px;
+  }
+  .graph-label {
+    font-size: 1.18rem;
   }
 </style>
 {#if radioValue === 'rating'}
 <div class='chart-container'>
-  <p><b>Rating</b></p>
+  <p class = 'graph-label'><b>Rating</b></p>
   <br>
   <LayerCake
     padding={{bottom: 15}}
@@ -110,7 +115,7 @@
 
 {#if radioValue === 'gross'}
 <div class='chart-container'>
-  <p><b>Gross ($)</b><br><i>Note: Movies with missing gross values have been excluded from the visualization below.</i></p>
+  <p class = 'graph-label'><b>Gross ($)</b><br><i>Note: Movies with missing gross values have been excluded from the visualization below.</i></p>
   <br>
   <LayerCake
     padding={{bottom: 15}}

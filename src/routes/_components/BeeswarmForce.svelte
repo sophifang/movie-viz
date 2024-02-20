@@ -82,7 +82,7 @@
           <title>{node.title} ({node.rating} rating)</title>
           {/if}
           {#if graph === "gross"}
-          <title>{node.title} ({+(node.gross/1000000).toFixed(2)}M gross)</title>
+          <title>{node.title} (${+(node.gross/1000000).toFixed(2)}M gross)</title>
           {/if}
         {/if}
       </circle>
@@ -90,13 +90,13 @@
 
           <circle
                 fill={`url(#image-pattern-${node.index})`}
-                stroke='{stroke}'
+                stroke='#666'
                 stroke-width='{strokeWidth}'
                 cx='{node.x}'
                 cy='{node.y}'
                 r='{r}'
                 filter = {'url(#saturate)'}
-                opacity = 0.45
+                opacity = 0.35
               >
                 {#if getTitle}
                   {#if graph === "rating"}
